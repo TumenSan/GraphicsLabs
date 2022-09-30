@@ -35,13 +35,16 @@
         /*x и y это точки в которые необходимо перейти, а координаты P(Px, Py) в квадратичной кривой это дополнительные точки которые используются для построения кривой. В кубическо кривой соответственно две дополнительные точки.
         Пример двух кривых:*/
         var Canvas1 = document.getElementById("Canvas1"),
-            ctxLines     = Canvas1.getContext('2d');
-            ctxPoints     = Canvas1.getContext('2d');
+            ctxLines = Canvas1.getContext('2d');
+            ctxPoints = Canvas1.getContext('2d');
+            ctxRounds = Canvas1.getContext('2d');
         Canvas1.height = 600;
-        Canvas1.width  = 1000;
+        Canvas1.width  = 1200;
 
-        x = 100;
-        y = 80;
+        let x = 100;
+        let y = 80;
+        let xMas = [100, 20, 30, 50];
+        let yMas = [80, 45, 55, 75];
         
         ctxPoints.beginPath();
         ctxPoints.arc(300,300,5,0,Math.PI*2,true); // Внешняя окружность
@@ -49,14 +52,38 @@
 
         ctxLines.beginPath();
         ctxLines.moveTo(300, 300);
-        ctxLines.bezierCurveTo(75, 55, 175, 20, x, y);
-        ctxLines.bezierCurveTo(95, 75, 195, 40, x + 20, y + 20);
+        ctxLines.bezierCurveTo(75, 55, 175, 20, xMas[0], yMas[0]);
+        ctxLines.bezierCurveTo(95, 75, 195, 40, xMas[0] + 20, yMas[0] + 20);
         //ctx.moveTo(10, 15);
         //ctx.quadraticCurveTo(70, 100, x, y);
         ctxLines.stroke();
 
 
+        let ctx = Canvas1.getContext('2d');
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        let step = 1;
+        let x1 = 0, y1 = 0; 
+        for (let i = step; i<Canvas1.width; i+=step){//вертикальные
+            ctx.moveTo(i, y1);
+            y1 = Math.pow(i, 2);
+            ctx.lineTo(i + step, y1);
+            
+        }
+        ctx.stroke();
+
         //
+        let mas = [];
+        var context = Canvas1.getContext("2d");
+        Canvas1.onclick = function(event){
+            mas.push(event.clientX, event.clientY);
+            ctxRounds.beginPath();
+            ctxRounds.arc(event.clientX,event.clientY,5,0,Math.PI*2,true);
+            ctxRounds.stroke();
+            console.log(mas);
+            //return mas;
+        }
+        /*
         var context = Canvas1.getContext("2d");
         
         var lines = [];
@@ -75,9 +102,11 @@
  
             // Draw lines
             lines.forEach(function(line) {
+
                 drawLine(
                     line.startPos.x, line.startPos.y,
                     line.endPos.x, line.endPos.y);
+                    //ctxPoints.arc(startPos.x,startPos.y,5,0,Math.PI*2,true);
             });
         }
  
@@ -98,7 +127,7 @@
                 x: xMousePos,
                 y: yMousePos
             };
-        }
+        }*/
     </script>
 
 </body>
