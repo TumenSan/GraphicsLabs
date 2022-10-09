@@ -13,16 +13,6 @@
     Кривая должна представлять из себя совокупность кубических кривых Безье. 
     Для нахождения недостающих точек для построения 
     кубических кривых Безье предлагается использовать алгоритм, рассмотренный в лекциях.-->
-    
-    <!--2. Трансформация растров (простейший алгоритм, билинейная и трилинейная фильтрация).
-    Пользователь открывает в программе произвольное изображение, 
-    мышью задает 3 точки на исходной картинке, задает другие 
-    3 точки (соответствия) в области, где будет строиться новая картинка. 
-    Задача: получить преобразованное изображение (повернутое, растянутое или 
-    сжатое и т.п. в зависимости от рассчитанной матрицы преобразования). Использовать 
-    билинейную фильтрацию при увеличении картинки и трилинейную – при ее уменьшении. 
-    Также оставить в программе возможность продемонстрировать работу простейшего алгоритма.
-    -->
 
     <script src="Graph.js">
 
@@ -30,7 +20,7 @@
     
     <canvas id='Canvas1'>Обновите браузер</canvas>
 
-    <button class="AddLine" onclick="AddLine()"> Прямые </button>
+    <button class="AddLine" onclick="AddLine()"> строить </button>
 
     <script>
         //quadraticCurveTo(Px, Py, x, y) 
@@ -61,22 +51,6 @@
         //ctx.quadraticCurveTo(70, 100, x, y);
         ctxLines.stroke();
 
-        /*
-        let ctx = Canvas1.getContext('2d');
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        let step = 1;
-        let x1 = 0, y1 = 0; 
-        for (let i = step; i<Canvas1.width; i+=step){//вертикальные
-            ctx.moveTo(i, y1);
-            y1 = Math.pow(i, 2);
-            ctx.lineTo(i + step, y1);
-        }
-        ctx.stroke();
-        */
-
-        
-
         //
         /*
         for (var j = 0; j < 100; j++) {
@@ -105,9 +79,7 @@
 
 
         //
-        let ctx = Canvas1.getContext('2d');
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
+
         let step = 1;
         let x1 = 0, y1 = 0; 
 
@@ -120,17 +92,8 @@
             ctxRounds.stroke();
             console.log(mas);
 
-            ctx.lineTo(event.clientX, event.clientY);
-            ctx.stroke();
-
             //return mas;
         }
-        let ctx3 = Canvas1.getContext('2d');
-        ctx3.beginPath();
-ctx3.moveTo(50, 50);
-ctx3.lineTo(150, 50);
-ctx3.lineTo(200, 150);
-ctx3.stroke();
 
         function AddLine() {
             let ctx5 = Canvas1.getContext('2d');
@@ -140,52 +103,7 @@ ctx3.stroke();
             }
             ctx5.stroke();
         }
-        //ctx.stroke();
-        /*
-        var context = Canvas1.getContext("2d");
-        
-        var lines = [];
-        var startPos, endPos;
- 
-        Canvas1.onmousedown = function(event) {
-            startPos = getCoords(event);
-        }
- 
-        Canvas1.onmouseup = function(event) {
-            endPos = getCoords(event);
-            lines.push({
-                startPos: startPos,
-                endPos: endPos
-            });
- 
-            // Draw lines
-            lines.forEach(function(line) {
 
-                drawLine(
-                    line.startPos.x, line.startPos.y,
-                    line.endPos.x, line.endPos.y);
-                    //ctxPoints.arc(startPos.x,startPos.y,5,0,Math.PI*2,true);
-            });
-        }
- 
-        function drawLine(x1, y1, x2, y2) {
-            context.beginPath();
-            context.strokeStyle = "red";
-            context.moveTo(x1, y1);
-            context.lineTo(x2, y2);
-            context.lineWidth = 2;
-            context.stroke();
-        }
- 
-        function getCoords() {
-            var rect = event.target.getBoundingClientRect();
-            var xMousePos = event.clientX - rect.left;
-            var yMousePos = event.clientY - rect.top;
-            return {
-                x: xMousePos,
-                y: yMousePos
-            };
-        }*/
     </script>
 
 </body>
