@@ -119,14 +119,24 @@
                 ctxRoundsDop.stroke();
             }
 
-            
+            //безье
+            ctxBez.beginPath();
+            ctxBez.moveTo(mas[0], mas[1]);
+            ctxBez.strokeStyle = "rgba(10,105,200,0.5)";
+            ctxBez.quadraticCurveTo(masMidLines2[0], masMidLines2[1], mas[2], mas[3]);
+            ctxBez.stroke();
             for(let i = 0; i < mas.length - 6; i+=2){
                 ctxBez.beginPath();
                 ctxBez.moveTo(mas[i + 2], mas[i + 3]);
-                ctxBez.strokeStyle = "rgba(110,255,200,0.5)";
+                ctxBez.strokeStyle = "rgba(10,105,200,0.5)";
                 ctxLines.bezierCurveTo(masMidLines2[2 * i + 2], masMidLines2[2 * i + 3], masMidLines2[2 * i + 4], masMidLines2[2 * i + 5], mas[i + 4], mas[i + 5]);
                 ctxBez.stroke();
             }
+            ctxBez.beginPath();
+            ctxBez.moveTo(mas[mas.length - 4], mas[mas.length - 3]);
+            ctxBez.strokeStyle = "rgba(10,105,200,0.5)";
+            ctxBez.quadraticCurveTo(masMidLines2[masMidLines2.length - 2], masMidLines2[masMidLines2.length - 1], mas[mas.length - 2], mas[mas.length - 1]);
+            ctxBez.stroke();
         }
 
     </script>
