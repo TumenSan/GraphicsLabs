@@ -31,25 +31,9 @@
             ctxLines = Canvas1.getContext('2d');
             ctxPoints = Canvas1.getContext('2d');
             ctxRounds = Canvas1.getContext('2d');
+            ctxRoundsMid = Canvas1.getContext('2d');
         Canvas1.height = 600;
         Canvas1.width  = 1200;
-
-        let x = 100;
-        let y = 80;
-        let xMas = [100, 20, 30, 50];
-        let yMas = [80, 45, 55, 75];
-        
-        ctxPoints.beginPath();
-        ctxPoints.arc(300,300,5,0,Math.PI*2,true); // Внешняя окружность
-        ctxPoints.stroke();
-
-        ctxLines.beginPath();
-        ctxLines.moveTo(300, 300);
-        ctxLines.bezierCurveTo(75, 55, 175, 20, xMas[0], yMas[0]);
-        ctxLines.bezierCurveTo(95, 75, 195, 40, xMas[0] + 20, yMas[0] + 20);
-        //ctx.moveTo(10, 15);
-        //ctx.quadraticCurveTo(70, 100, x, y);
-        ctxLines.stroke();
 
         //
         /*
@@ -84,10 +68,19 @@
         let x1 = 0, y1 = 0; 
 
         let mas = [];
+        let masMidLines = [];
+        let masMidMidLines = [];
+        let i = 0;
         var context = Canvas1.getContext("2d");
         Canvas1.onclick = function(event){
             mas.push(event.clientX, event.clientY);
+            if (i > 0){
+                masMidLines.push(((mas[i - 2] + mas[i]) / 2), (((mas[i-1]) + mas[i+1]) / 2));
+
+            }
+            i+=2;
             ctxRounds.beginPath();
+            ctxRounds.strokeStyle = "rgba(0,0,255,0.5)";
             ctxRounds.arc(event.clientX,event.clientY,5,0,Math.PI*2,true);
             ctxRounds.stroke();
             console.log(mas);
@@ -95,13 +88,40 @@
             //return mas;
         }
 
+        
         function AddLine() {
-            let ctx5 = Canvas1.getContext('2d');
-            ctx5.moveTo(mas[0], mas[1]);
+            let PointLines = Canvas1.getContext('2d');
+            let MidLines = Canvas1.getContext('2d');
+
+            PointLines.moveTo(mas[0], mas[1]);
             for(let i = 2; i < mas.length; i+=2){
-                ctx5.lineTo(mas[i], mas[i+1]);
+                PointLines.lineTo(mas[i], mas[i+1]);
             }
-            ctx5.stroke();
+            PointLines.stroke();
+
+            MidLines.moveTo(0, 0);
+            MidLines.moveTo(masMidLines[0], masMidLines[1]);
+            for(let i = 2; i < mas.length - 2; i+=2){
+                //masMidLines.push(((mas[i] + mas[i+2]) / 2), (((mas[i+1]) + mas[i+3]) / 2));
+                MidLines.strokeStyle = "rgba(255,0,0,0.5)";
+                MidLines.lineTo(masMidLines[i], masMidLines[i+1]);
+            }
+            console.log(masMidLines);
+            MidLines.stroke();
+
+            for(let i = 2; i < (masMidLines.length + 2); i+=2){
+                masMidMidLines.push(((masMidLines[i - 2] + masMidLines[i]) / 2), (((masMidLines[i-1]) + masMidLines[i+1]) / 2));
+                console.log((masMidLines[i - 2] + masMidLines[i]) / 2);
+                console.log((masMidLines[i-1] + masMidLines[i+1]) / 2);
+            }
+
+            for(let i = 0; i < masMidMidLines.length - 2; i+=2){
+                ctxRoundsMid.beginPath();
+                ctxRoundsMid.strokeStyle = "rgba(0,255,0,0.5)";
+                ctxRoundsMid.arc(masMidMidLines[i], masMidMidLines[i + 1],5,0,Math.PI*2,true);
+                ctxRoundsMid.stroke();
+            }
+            console.log(masMidMidLines);
         }
 
     </script>
