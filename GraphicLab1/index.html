@@ -32,35 +32,10 @@
             ctxPoints = Canvas1.getContext('2d');
             ctxRounds = Canvas1.getContext('2d');
             ctxRoundsMid = Canvas1.getContext('2d');
+            ctxRoundsDop = Canvas1.getContext('2d');
+            ctxBez = Canvas1.getContext('2d');
         Canvas1.height = 600;
         Canvas1.width  = 1200;
-
-        //
-        /*
-        for (var j = 0; j < 100; j++) {
-
-            var newX = 0;
-
-            var newY = 0;
-
-            for (var i = 0; i < pointsAmount; i++) {
-
-                var B = ((factorial(pointsAmount - 1) / (factorial(i) * factorial(pointsAmount - 1 - i)))
-                    * Math.pow(currentT, i) * Math.pow(1 - currentT, pointsAmount - 1 - i));
-
-
-                newX = newX + B * mainPoints.at(i).Xcoord;
-                newY = newY + B * mainPoints.at(i).Ycoord;
-            }
-
-            drawPointsX.push(newX);
-            drawPointsY.push(newY);
-
-            currentT = currentT + step;
-        }
-        */
-        //
-
 
         //
 
@@ -69,9 +44,10 @@
 
         let mas = [];
         let masMidLines = [];
+        let masMidLines2 = [];
         let masMidMidLines = [];
         let i = 0;
-        var context = Canvas1.getContext("2d");
+
         Canvas1.onclick = function(event){
             mas.push(event.clientX, event.clientY);
             if (i > 0){
@@ -121,7 +97,36 @@
                 ctxRoundsMid.arc(masMidMidLines[i], masMidMidLines[i + 1],5,0,Math.PI*2,true);
                 ctxRoundsMid.stroke();
             }
-            console.log(masMidMidLines);
+            console.log('masMidMidLines', masMidMidLines);
+
+            
+            for(let i = 0; i < masMidLines.length - 2; i+=2){
+                let difx = masMidMidLines[i] - mas[i + 2];
+                let dify =  mas[i + 3] - masMidMidLines[i + 1];
+
+                masMidLines2.push(masMidLines[i] - difx);
+                masMidLines2.push(masMidLines[i + 1] + dify);
+                masMidLines2.push(masMidLines[i + 2] - difx);
+                masMidLines2.push(masMidLines[i + 3] + dify);
+            }
+            console.log('masMidLines2', masMidLines2);
+            console.log(masMidLines2);
+
+            for(let i = 0; i < masMidLines2.length; i+=2){
+                ctxRoundsDop.beginPath();
+                ctxRoundsDop.strokeStyle = "rgba(0,255,0,0.5)";
+                ctxRoundsDop.arc(masMidLines2[i], masMidLines2[i + 1],5,0,Math.PI*2,true);
+                ctxRoundsDop.stroke();
+            }
+
+            
+            for(let i = 0; i < mas.length - 6; i+=2){
+                ctxBez.beginPath();
+                ctxBez.moveTo(mas[i + 2], mas[i + 3]);
+                ctxBez.strokeStyle = "rgba(110,255,200,0.5)";
+                ctxLines.bezierCurveTo(masMidLines2[2 * i + 2], masMidLines2[2 * i + 3], masMidLines2[2 * i + 4], masMidLines2[2 * i + 5], mas[i + 4], mas[i + 5]);
+                ctxBez.stroke();
+            }
         }
 
     </script>
