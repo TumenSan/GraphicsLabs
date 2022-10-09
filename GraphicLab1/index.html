@@ -29,6 +29,9 @@
     </script>
     
     <canvas id='Canvas1'>Обновите браузер</canvas>
+
+    <button class="AddLine" onclick="AddLine()"> Прямые </button>
+
     <script>
         //quadraticCurveTo(Px, Py, x, y) 
         //bezierCurveTo(P1x, P1y, P2x, P2y, x, y)
@@ -58,7 +61,7 @@
         //ctx.quadraticCurveTo(70, 100, x, y);
         ctxLines.stroke();
 
-
+        /*
         let ctx = Canvas1.getContext('2d');
         ctx.beginPath();
         ctx.moveTo(0, 0);
@@ -68,11 +71,46 @@
             ctx.moveTo(i, y1);
             y1 = Math.pow(i, 2);
             ctx.lineTo(i + step, y1);
-            
         }
         ctx.stroke();
+        */
+
+        
 
         //
+        /*
+        for (var j = 0; j < 100; j++) {
+
+            var newX = 0;
+
+            var newY = 0;
+
+            for (var i = 0; i < pointsAmount; i++) {
+
+                var B = ((factorial(pointsAmount - 1) / (factorial(i) * factorial(pointsAmount - 1 - i)))
+                    * Math.pow(currentT, i) * Math.pow(1 - currentT, pointsAmount - 1 - i));
+
+
+                newX = newX + B * mainPoints.at(i).Xcoord;
+                newY = newY + B * mainPoints.at(i).Ycoord;
+            }
+
+            drawPointsX.push(newX);
+            drawPointsY.push(newY);
+
+            currentT = currentT + step;
+        }
+        */
+        //
+
+
+        //
+        let ctx = Canvas1.getContext('2d');
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        let step = 1;
+        let x1 = 0, y1 = 0; 
+
         let mas = [];
         var context = Canvas1.getContext("2d");
         Canvas1.onclick = function(event){
@@ -81,8 +119,28 @@
             ctxRounds.arc(event.clientX,event.clientY,5,0,Math.PI*2,true);
             ctxRounds.stroke();
             console.log(mas);
+
+            ctx.lineTo(event.clientX, event.clientY);
+            ctx.stroke();
+
             //return mas;
         }
+        let ctx3 = Canvas1.getContext('2d');
+        ctx3.beginPath();
+ctx3.moveTo(50, 50);
+ctx3.lineTo(150, 50);
+ctx3.lineTo(200, 150);
+ctx3.stroke();
+
+        function AddLine() {
+            let ctx5 = Canvas1.getContext('2d');
+            ctx5.moveTo(mas[0], mas[1]);
+            for(let i = 2; i < mas.length; i+=2){
+                ctx5.lineTo(mas[i], mas[i+1]);
+            }
+            ctx5.stroke();
+        }
+        //ctx.stroke();
         /*
         var context = Canvas1.getContext("2d");
         
