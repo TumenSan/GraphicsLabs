@@ -89,14 +89,18 @@
             MidLines.stroke();
 
             for(let i = 2; i < (masMidLines.length + 2); i+=2){
-                masMidMidLines.push(((masMidLines[i - 2] + masMidLines[i]) / 2), (((masMidLines[i-1]) + masMidLines[i+1]) / 2));
-                console.log((masMidLines[i - 2] + masMidLines[i]) / 2);
-                console.log((masMidLines[i-1] + masMidLines[i+1]) / 2);
+                let FirstLine = Math.sqrt(Math.pow((mas[i] - mas[i - 2]), 2) + Math.pow((mas[i + 1] - mas[i - 1]), 2));
+                console.log('FirstLine ', FirstLine)
+                let SecondLine = Math.sqrt(Math.pow((mas[i + 2] - mas[i]), 2) + Math.pow((mas[i + 3] - mas[i + 1]), 2));
+                console.log('MidPoint ', SecondLine)
+                let MidPoint = 1 / (FirstLine / SecondLine + 1);
+                console.log('MidPoint ', MidPoint);
+                masMidMidLines.push((masMidLines[i - 2] - (masMidLines[i - 2] - masMidLines[i]) * (1 - MidPoint)), (masMidLines[i-1] - ((masMidLines[i-1]) - masMidLines[i+1]) * (1 - MidPoint)));
             }
 
             for(let i = 0; i < masMidMidLines.length - 2; i+=2){
                 ctxRoundsMid.beginPath();
-                ctxRoundsMid.strokeStyle = "rgba(0,255,0,0.5)";
+                ctxRoundsMid.strokeStyle = "rgba(150,105,50,0.5)";
                 ctxRoundsMid.arc(masMidMidLines[i], masMidMidLines[i + 1],5,0,Math.PI*2,true);
                 ctxRoundsMid.stroke();
             }
