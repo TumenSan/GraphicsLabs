@@ -2,20 +2,47 @@ import turtle
 
 turtle.speed(10) 
 
-ruleInput = ['F', 'X']
-ruleOutput = ["FF", "F-[[X]+X]+F[+FX]-X"]
+#ruleInput = ['F', 'X']
+#ruleOutput = ["FF", "F-[[X]+X]+F[+FX]-X"]
+
+#ruleInput = ['F']
+#ruleOutput = ["F-F++F-F"]      #F
+#start = "F++F++F"      #S
+
+#ruleInput = ['F']
+#ruleOutput = ["-F[-F+F-F]+[+F-F-F]"]
+#start = "F"
+
+#ruleInput = ['X', 'F']
+#ruleOutput = ["--FXF++FXF++FXF--", 'FF']       #X #F
+#start = "FXF--FF--FF"   #S
+
+
+ruleInput = ['X', 'F']
+ruleOutput = ["F[+X][-X]FX", "FF"]
 start = "X"
 
+#ruleOutput = ["F[+F]F[-F]F"]
+#ruleOutput = ["F[+X][-X]FX"]
+#ruleOutput = ["FF", "F+F[+FX]-X"]
+#start = "F"
+
+
 front = 5
-turn = 30
+#front = 20
+#front = 20
+#turn = 26
+turn = 60
+turn = 26
+#turn = 26
 stack = []
 dirstack = []
 
 turtle.left(90)
-turtle.penup()
-turtle.setpos(0, -350)
-turtle.pendown()
-turtle.shape("turtle")
+turtle.penup()          #перо поднять
+turtle.setpos(0, -100)  #поставить позицию?
+turtle.pendown()        #перо опустить
+#turtle.shape("turtle")
 
 def generate(iteration):
 	result = start
@@ -53,4 +80,4 @@ def draw(input):
 	turtle.hideturtle()
 	turtle.done()
 
-draw(generate(6))
+draw(generate(5))
