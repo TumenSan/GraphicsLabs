@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab 3</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <!--3.	Построение фракталов
+3.1. Разработка приложения для построения на плоскости двумерных фракталов, 
+заданных в виде L-систем (описаны в лекциях).
+3.2. Разработка приложения для построения в 3D фракталов, заданных в виде 
+L-систем (для этого необходимо расширить алфавит L-систем, 
+реализовать отрисовку хотя бы одного трёхмерного фрактала в пространстве). 
+Должна быть возможность приблизиться, удалиться, 
+«полетать» вокруг фрактала, чтобы рассмотреть его с разных сторон.
+Для получения оценки «отлично» за эту лабораторную необходимо реализовать 3.1 + 3.2 
+(можно в одном приложении, можно 2 разных). В упрощённом варианте, 
+выполнив только пункт 3.1, можно получить за лабораторную оценку «хорошо».-->
+
+    <script src="Graph.js">
+
+    </script>
+    
+    <canvas id='Canvas1'>Обновите браузер</canvas>
+
+    <button class="AddLine" onclick="AddLine()"> строить </button>
+
+    <script>
+        //quadraticCurveTo(Px, Py, x, y) 
+        //bezierCurveTo(P1x, P1y, P2x, P2y, x, y)
+        /*x и y это точки в которые необходимо перейти, а координаты P(Px, Py) в квадратичной кривой это дополнительные точки которые используются для построения кривой. В кубическо кривой соответственно две дополнительные точки.
+        Пример двух кривых:*/
+        var Canvas1 = document.getElementById("Canvas1"),
+            ctxLines = Canvas1.getContext('2d');
+            ctxPoints = Canvas1.getContext('2d');
+            ctxRounds = Canvas1.getContext('2d');
+            ctxRoundsMid = Canvas1.getContext('2d');
+            ctxRoundsDop = Canvas1.getContext('2d');
+            ctx = Canvas1.getContext('2d');
+        Canvas1.height = 600;
+        Canvas1.width  = 1200;
+
+        //
+        /*
+        ctxPoints.beginPath();
+        ctxPoints.moveTo(0, 0);
+        ctxPoints.lineTo(60, 40);
+        ctxPoints.stroke();
+        */
+
+        ctxLines.beginPath();
+        ctxLines.moveTo(400, 500);
+
+        /*
+        //let masMidLines2 = [];
+        //let masMidMidLines = [];
+        //
+        // Point of transform origin
+        ctx.arc(0, 0, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+
+        // Non-rotated rectangle
+        ctx.fillStyle = 'gray';
+        ctx.fillRect(100, 0, 80, 20);
+
+        // Rotated rectangle
+        ctx.rotate(45 * Math.PI / 180);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(100, 0, 80, 1);
+
+        // Reset transformation matrix to the identity matrix
+        //ctx.setTransform(1, 0, 0, 1, 0, 0);
+        //
+        */
+
+        function dF(Step){
+            //ctxLines.beginPath();
+            //ctxLines.moveTo(100, 80);
+            ctxLines.lineTo(60, 40);
+            ctxLines.lineTo(690, 300);
+            ctxLines.lineTo(220, 400);
+            ctxLines.moveTo(200, 200);
+            ctxLines.translate(200, 200);
+            ctxLines.rotate(45 * Math.PI / 180);
+            ctxLines.fillRect(0, 0, 80, 1);
+            ctxLines.stroke();
+
+            ctxPoints.moveTo(300, 300);
+            ctxPoints.lineTo(50, 50);
+            ctxPoints.stroke();
+        }
+
+        function db(Step){
+
+        }
+
+        function dPlus(a){
+
+        }
+
+        function dMinus(a){
+
+        }
+        
+        function AddLine() {
+            let step = 10;
+
+            dF(step);
+
+        }
+
+    </script>
+
+</body>
+</html>
