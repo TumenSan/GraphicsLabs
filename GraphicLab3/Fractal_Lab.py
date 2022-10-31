@@ -1,6 +1,7 @@
 import turtle
 
 turtle.speed(10) 
+turtle.tracer(2)
 
 #ruleInput = ['F']
 #ruleOutput = ["F-F++F-F"]      #F
@@ -39,7 +40,7 @@ turtle.left(90)
 turtle.penup()          #перо поднять
 turtle.setpos(0, -100)  #поставить позицию?
 turtle.pendown()        #перо опустить
-#turtle.shape("turtle")
+turtle.shape("turtle")
 
 def generate(iteration):
 	result = start
@@ -135,6 +136,9 @@ elif Choose == 5:
         draw(generate(gen))
 #Кривая Гильберта
 elif Choose == 6:
+        turtle.penup() 
+        turtle.setpos(200, -200)
+        turtle.pendown() 
         front = 5
         turn = 90
         ruleInput = ['X', 'F', 'Y']
