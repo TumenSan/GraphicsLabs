@@ -1,51 +1,3 @@
-#from matplotlib import image as img
-"""
-from PIL import Image
-
-import numpy as np
-
-import matplotlib.pyplot as plt
-
-print('123')
-
-img = Image.open(r'images/Yes.png')
-
-def show(img, title=None):
-    plt.figure(figsize=(6, 6))
-    plt.imshow(img)
-
-    if title is not None:
-        plt.title(title)
-
-    plt.axis('off')
-
-show(img)
-"""
-
-
-"""
-import os
-import numpy as np
-import matplotlib.pyplot as plt
-
-#  cbook - модуль "всяких полезностей":
-import matplotlib.cbook as cbook
-
-#  Конструкция "with ... as" гарантирует, что файл
-#  будет закрыт после прочтения:
-with cbook.get_sample_data('/images/Yes.jpg') as image_file:
-    image = plt.imread(image_file)
-
-fig, ax = plt.subplots()
-
-ax.imshow(image)
-ax.set_title(type(image))
-
-fig.set_figwidth(7)    #  ширина и
-fig.set_figheight(7)    #  высота "Figure"
-
-plt.show()
-"""
 
 #import array as arr
 import numpy as np
@@ -79,7 +31,9 @@ for x in range(width):
        draw.point((x, y), (r + 30, g + 30, b + 30)) #рисуем пиксель яркость
        #draw.point((x, y), (r, g, b)) #рисуем пиксель обычная
 
-image1.save("result3.jpg", "JPEG") #не забываем сохранить изображение
+image1.save("result1.jpg", "JPEG") #не забываем сохранить изображение
+
+
 
 
 image2 = Image.open("images/round.jpg")
@@ -88,10 +42,25 @@ width = image2.size[0]
 height = image2.size[1]
 pix = image2.load()
 
-#matrix = arr.array('i',[0,0,0,0,0,0,0,0,0])
 
+Choose = int(input("Input number: "))
+if Choose == 1:
+    Core = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+elif Choose == 2:
+    Core = [[0, 1, 0], [1, 4, 1], [0, 1, 0]]
+elif Choose == 3:
+    Core = [[0, 1, 0], [1, 0, -1], [0, -1, 0]]
+elif Choose == 4:
+    Core = [[0, 1, 0], [1, -4, 1], [0, 1, 0]]
+elif Choose == 5:
+    Core = [[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]]
+elif Choose == 6:
+    Core = [[1, 2, 1], [2, 4, 2], [1, 2, 1]]
+else:
+    print('err')
+    Core = [[1, 2, 1], [2, 4, 2], [1, 2, 1]]
 SumCore = 0
-Core = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+#Core = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
 #Core = [[0, 1, 0], [1, 0, -1], [0, -1, 0]]
 #Core = [[0, 1, 0], [1, -4, 1], [0, 1, 0]]
 #Core = [[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]]
@@ -145,10 +114,10 @@ for x in range(1, width - 1):
         #draw.point((x, y), (r, g, b)) #рисуем пиксель обычная
                
 
-image2.save("result5.jpg", "JPEG") #не забываем сохранить изображение
+image2.save("result.jpg", "JPEG") #не забываем сохранить изображение
 
 
-
+"""
 
 Point1 = [100, 215]
 Point2 = [100, 110]
@@ -227,3 +196,4 @@ for x in range(1, width - 1):
                
 
 image3.save("result6.jpg", "JPEG") #не забываем сохранить изображение
+"""
